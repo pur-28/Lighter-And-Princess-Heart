@@ -1,49 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
 body {
     margin: 0;
     overflow: hidden;
-    background-color: black;
+    background-color: #0a0a0a;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    font-family: 'Arial', sans-serif;
+    min-height: 100vh;
+    font-family: 'Segoe UI', 'Arial', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+    touch-action: manipulation;
 }
 
+/* Canvas container for responsive scaling */
+.canvas-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, #110011 0%, #000000 100%);
+}
+
+canvas {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    box-shadow: 0 0 30px rgba(227, 39, 83, 0.2);
+    transition: all 0.2s ease;
+}
+
+/* Overlay start screen - fully responsive & touch friendly */
 #overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: black;
+    background: radial-gradient(ellipse at center, #1a0510 0%, #000000 100%);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 100;
+    z-index: 200;
     cursor: pointer;
-    color: #e32753;
-    transition: opacity 1.2s ease, visibility 1.2s;
+    backdrop-filter: blur(3px);
+    transition: opacity 1.4s cubic-bezier(0.23, 1, 0.32, 1), visibility 1.4s;
+    font-family: inherit;
 }
 
 #overlay.hidden {
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
 }
 
 .play-btn {
-    font-size: 80px;
-    filter: drop-shadow(0 0 15px #e32753);
-    animation: heartBeat 1.4s infinite;
+    font-size: clamp(60px, 20vw, 140px);
+    filter: drop-shadow(0 0 20px #e32753) drop-shadow(0 0 8px #ff6680);
+    animation: heartBeat 1.4s infinite ease-in-out;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.play-btn:active {
+    transform: scale(0.92);
 }
 
 @keyframes heartBeat {
     0% {
         transform: scale(1);
+        text-shadow: 0 0 0px #e32753;
     }
 
     14% {
-        transform: scale(1.15);
+        transform: scale(1.18);
+        text-shadow: 0 0 15px #ff3b6f;
     }
 
     28% {
@@ -51,7 +95,8 @@ body {
     }
 
     42% {
-        transform: scale(1.1);
+        transform: scale(1.12);
+        text-shadow: 0 0 8px #ff6680;
     }
 
     70% {
@@ -60,9 +105,46 @@ body {
 }
 
 #overlay p {
-    margin-top: 20px;
-    letter-spacing: 3px;
+    margin-top: 24px;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    font-size: 14px;
-    opacity: 0.6;
+    font-size: clamp(12px, 4vw, 18px);
+    font-weight: 300;
+    background: linear-gradient(135deg, #e32753, #ff8c9e);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    opacity: 0.9;
+    text-align: center;
+    padding: 0 20px;
+    word-break: keep-all;
+}
+
+/* responsive canvas */
+@media (max-width: 640px) {
+    canvas {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.touch-hint {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 10px;
+    color: rgba(227, 39, 83, 0.5);
+    pointer-events: none;
+    z-index: 50;
+    font-family: monospace;
+    transition: opacity 0.8s;
+}
+
+@media (max-width: 600px) {
+    .touch-hint {
+        font-size: 8px;
+        bottom: 12px;
+    }
 }
