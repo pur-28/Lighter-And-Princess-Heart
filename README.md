@@ -9,6 +9,10 @@ Just click to begin and let the magic unfold ✨
 
 👉 https://pur-28.github.io/Lighter-And-Princess-Heart/
 
+OR
+
+👉https://lp-heart.netlify.app/
+
 ---
 
 ## ✨ Features
