@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Lighter & Princess Heart</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -11,14 +11,20 @@
 <body>
     <div id="overlay">
         <div class="play-btn">❤️</div>
-        <p>Click to Start</p>
+        <p>Ignite the heart</p>
+        <div class="touch-hint" style="position: relative; bottom: auto; margin-top: 30px; opacity: 0.6;"> Click on
+            Heart </div>
     </div>
 
-    <audio id="bgMusic" loop>
+    <audio id="bgMusic" loop preload="auto">
         <source src="music.mp3" type="audio/mpeg">
     </audio>
 
-    <canvas id="heartCanvas"></canvas>
+    <div class="canvas-wrapper">
+        <canvas id="heartCanvas"></canvas>
+    </div>
+    <div class="touch-hint" id="hintMsg">✨ The Breathing Heart & Leaping Particles ✨</div>
+
     <script src="script.js"></script>
 </body>
 
